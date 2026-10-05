@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "payload-x402"
+version = "0.1.0"
+description = "LangChain tools for x402 paid endpoints: inspect, parse payment requirements, readiness checks, approved payable calls."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Payload", email = "kylers.partners@gmail.com" }]
+keywords = ["x402", "langchain", "ai-agents", "payments", "usdc", "api-monetization"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "langchain-core>=0.3",
+    "httpx>=0.27",
+]
+
+[project.urls]
+Homepage = "https://payloadhq.github.io/"
+Repository = "https://github.com/Payloadhq/payload-x402"
+Documentation = "https://github.com/Payloadhq/payload-x402#readme"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["payload_x402*"]
