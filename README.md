@@ -115,3 +115,9 @@ Built by [Payload](https://payloadhq.github.io/).
 ## License
 
 MIT
+
+---
+
+**More from Payload** · [payloadhq.github.io](https://payloadhq.github.io/) · [all Payload repos](https://github.com/Payloadhq)
+
+Related: [callx402](https://github.com/Payloadhq/callx402) · [flow-agentic-demo](https://github.com/Payloadhq/flow-agentic-demo)
