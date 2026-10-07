@@ -13,7 +13,7 @@ operator-approved payable calls.
 ## Install
 
 ```bash
-pip install payload-x402
+pip install git+https://github.com/Payloadhq/payload-x402
 ```
 
 ## Quickstart
@@ -104,10 +104,10 @@ in full. Use it only for operator-approved calls.
   rescues broken x402 calls. When x402 breaks, callx402.
 - **Running x402 in production:** Veyline by Payload is the production layer
   for x402 + MCP: autonomous economic control for machine commerce.
-- **When money moves, decide who earns what:** [RevRule by Payload](https://payloadhq.github.io/)
+- **When money moves, decide who earns what:** [RevRule by Payload](https://payloadtools.gumroad.com/l/revrule-by-payload)
   , the programmable revenue rules engine.
 - **Learn to build paid APIs:** the
-  [Veyline Developer Primer](https://payloadtools.gumroad.com/) (formerly the
+  [Veyline Developer Primer](https://payloadtools.gumroad.com/l/x402-paid-api-starter-kit) (formerly the
   x402 Paid API Starter Kit, $79).
 
 Built by [Payload](https://payloadhq.github.io/).
