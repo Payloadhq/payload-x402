@@ -1,8 +1,14 @@
 # payload-x402
 
-Let your LangChain agent pay for APIs — and check whether paid endpoints actually work before trusting them.
+**LangChain tools for x402 paid endpoints. By Payload.**
 
-Your agent finds a paid API. Is it reachable? Does it return a proper `402`? Is the challenge parseable — network, asset, amount, payTo? `payload-x402` gives your agent four tools that answer these questions, plus one for making operator-approved payable calls.
+Let your LangChain agent pay for APIs, and check whether paid endpoints
+actually work before trusting them.
+
+Your agent finds a paid API. Is it reachable? Does it return a proper `402`?
+Is the challenge parseable: network, asset, amount, payTo? `payload-x402`
+gives your agent four tools that answer these questions, plus one for making
+operator-approved payable calls.
 
 ## Install
 
@@ -31,7 +37,7 @@ tools = [
 # agent = create_agent(model, tools)
 ```
 
-### 1. Inspect an endpoint — is it paid, and what version?
+### 1. Inspect an endpoint: is it paid, and what version?
 
 ```python
 tool = X402InspectTool()
@@ -58,7 +64,8 @@ print(tool.invoke({"url": "https://api.example.com/data"}))
 # {"verdict": "PASS", "checks": {"reachable": {...}, "returns_402": {...}, ...}}
 ```
 
-This is the LangChain equivalent of Payload's [x402-manifest-check](https://github.com/Payloadhq/x402-manifest-check) GitHub Action.
+This is the LangChain equivalent of Payload's
+[x402-manifest-check](https://github.com/Payloadhq/x402-manifest-check) GitHub Action.
 
 ### 4. Make an operator-approved payable call
 
@@ -74,19 +81,36 @@ print(tool.invoke({
 
 ## Security: no keys held, ever
 
-`payload-x402` **never signs payments and never holds private keys.** The payable-call tool takes a pre-supplied `payment_signature` as an explicit argument — the agent operator obtains and authorizes the payment out-of-band. The tool only attaches the signature to one HTTP call and never echoes it back in full. Use it only for operator-approved calls.
+`payload-x402` **never signs payments and never holds private keys.** The
+payable-call tool takes a pre-supplied `payment_signature` as an explicit
+argument. The agent operator obtains and authorizes the payment out-of-band.
+The tool only attaches the signature to one HTTP call and never echoes it back
+in full. Use it only for operator-approved calls.
 
 ## How it works
 
-- `X402Client` (`payload_x402/client.py`): read-only x402 HTTP client. Detects v1 (`X-PAYMENT`, `maxAmountRequired`) and v2 (`PAYMENT-REQUIRED` base64 header, atomic-unit amounts, CAIP-2 networks like `eip155:8453` → `base`).
-- `check_readiness` (`payload_x402/readiness.py`): runs reachable → 402 → version → challenge parseable → manifest present, and returns PASS/DEGRADED/FAIL.
-- Tools (`payload_x402/tools.py`): `BaseTool` subclasses with Pydantic `args_schema`, ready for any LangChain agent.
+- `X402Client` (`payload_x402/client.py`): read-only x402 HTTP client. Detects
+  v1 (`X-PAYMENT`, `maxAmountRequired`) and v2 (`PAYMENT-REQUIRED` base64 header,
+  atomic-unit amounts, CAIP-2 networks like `eip155:8453` → `base`).
+- `check_readiness` (`payload_x402/readiness.py`): runs reachable → 402 →
+  version → challenge parseable → manifest present, and returns
+  PASS/DEGRADED/FAIL.
+- Tools (`payload_x402/tools.py`): `BaseTool` subclasses with Pydantic
+  `args_schema`, ready for any LangChain agent.
 
-## Learn more
+## Beyond inspection
 
-- [Payload x402 Paid API Starter Kit](https://payloadtools.gumroad.com/) — put per-call USDC payments on your own API
-- [RevRule](https://payload-rail.fly.dev/revrule-console/) — when money moves, decide who earns what
-- Built by [Payload](https://payloadhq.github.io/)
+- **When a 402 breaks:** callx402 by Payload — powered by Veyline diagnoses and
+  rescues broken x402 calls. When x402 breaks, callx402.
+- **Running x402 in production:** Veyline by Payload is the production layer
+  for x402 + MCP: autonomous economic control for machine commerce.
+- **When money moves, decide who earns what:** [RevRule by Payload](https://payloadhq.github.io/)
+  , the programmable revenue rules engine.
+- **Learn to build paid APIs:** the
+  [Veyline Developer Primer](https://payloadtools.gumroad.com/) (formerly the
+  x402 Paid API Starter Kit, $79).
+
+Built by [Payload](https://payloadhq.github.io/).
 
 ## License
 
